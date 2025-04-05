@@ -1,0 +1,52 @@
+body {
+    background-color: white;
+    font-family: Helvetica, sans-serif;
+    font-size: 100%;
+}
+
+
+.top_menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+.top_menu li {
+    float: left;
+}
+
+.top_menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.top_menu li a:hover {
+    background-color: #111111;
+}
+
+.hero_page {
+    background-color: #5fd400;
+    padding: 1%;
+}
+
+.logo h1 {
+    text-align: center;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+
+.image_container {
+    width: 48%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    position: relative;
+}
