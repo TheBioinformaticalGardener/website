@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Bioinformatical Garden - Blog</title>
+    <link rel="stylesheet" href="../website_style.css" />
+  </head>
+
+  <body>
+    <!-- Navigation menu -->
+    <div class="top_menu">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../webpages/about_project.html">About - the garden</a></li>
+        <li><a href="../webpages/about_me.html">About - the gardener</a></li>
+        <li><a href="../webpages/blog.html">Blog</a></li>
+        <li><a href="#webpages/news.html">News</a></li>
+      </ul>
+    </div>
+
+    <!-- Top heading -->
+    <div class="logo">
+      <h1>Blog</h1>
+    </div>
+
+    <!-- Entries section -->
+    <!-- NB! Following script from ChatGPT -->
+    <div id="blog_entry-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+    fetch("blog_entries/entries.json")
+        .then((res) => res.json())
+        .then((entries) => {
+        const container = document.getElementById("blog_entry-container");
+
+        entries.forEach((entry) => {
+            fetch(entry.file)
+            .then((res) => res.text())
+            .then((md) => {
+                const article = document.createElement("article");
+                article.innerHTML = `
+                <h2>${entry.title}</h2>
+                <p><em>${entry.creation_date}</em></p>
+                ${marked.parse(md)}
+                `;
+                container.appendChild(article);
+            });
+        });
+        });
+    </script>
+
+  </body>
+</html>
