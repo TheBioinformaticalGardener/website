@@ -1,52 +1,220 @@
-body {
-    background-color: white;
-    font-family: Helvetica, sans-serif;
-    font-size: 100%;
+:root {
+    --main-bg-color: rgb(251, 255, 251);
+    --secondary-bg-color: #333333;
+    --secondary-bg-color-hover: #111111;
+    --main-text-color: black;
+    --secondary-text-color: white;
+    --main-link-color: blue;
+    --gr: 1.618;
+    --main-font-size: 1em;
+    --z-index-front: 2;
 }
 
-
-.top_menu ul {
-    list-style-type: none;
+* {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #333333;
+    box-sizing: border-box;
+    /* padding-left: .5%;
+    padding-right: .5%; */
+  }
+
+body {
+    background-color: var(--main-bg-color);
+    font-family: Helvetica, sans-serif;
+    min-height: 100dvh;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+    "navbar navbar navbar"
+    "sidebar-left main sidebar-right"
+    "sidebar-left footer footer";
 }
 
-.top_menu li {
-    float: left;
+nav {
+    grid-area: navbar;
+    top: 0;
+    position: sticky;
+    z-index: var(--z-index-front);
+    /* border-bottom: 1px solid white; */
+    background-color: var(--secondary-bg-color);
 }
 
-.top_menu li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 16px;
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    display: flex;
+}
+
+nav a {
+    display: flex;
     text-decoration: none;
+    color: var(--secondary-text-color);
+    padding: 1em 2em;
+    transition: background-color 150ms ease;
 }
 
-.top_menu li a:hover {
-    background-color: #111111;
+nav a:hover {
+    background-color: var(--secondary-bg-color-hover);
 }
+
+nav a.active-link {
+    border-bottom: 2px solid red;
+}
+
+#open-nav-button {
+    display: none;
+    background: none;
+    border: none;
+    padding: 1em;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+#close-nav-button {
+    display: none;
+    background: none;
+    border: none;
+    padding: 1em;
+    cursor: pointer;
+}
+
+#overlay{
+    background: rgba(0, 0, 0, .5);
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+    display: none;
+}
+
+@media screen and (max-width: 700px){
+    #open-nav-button, #close-nav-button{
+        display: block;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100dvh;
+        height: 100vh;
+        width: min(15em, 100%);
+        z-index: 10;
+        border-left: 1px solid var(--secondary-bg-color-hover);
+        transition: right 300ms ease-out;
+    }
+
+    nav.show {
+        right: 0;
+        /* TODO Make sure that menu items are not available to TAB when hidden */
+    }
+
+    nav.show ~ #overlay {
+        display: block;
+    }
+
+    nav ul {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    nav a {
+        width: 100%;
+        padding-left: 2.5em;
+    }
+}
+
+
+
+.sidebar-left aside { /*https://www.youtube.com/watch?v=S9OiWe5iBYo*/
+    grid-area: sidebar-left;
+    display: none;
+}
+
+.sidebar-right aside {
+    grid-area: sidebar-right;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+    z-index: var(--z-index-front);
+}
+/* 
+p {
+    font-size: var(--main-font-size);
+}
+
+h3 {
+    font-size: var(--main-font-size) * var(--gr);
+}
+h2 {
+    font-size: var(--main-font-size) * (2 * var(--gr));
+}
+
+h1 {
+    font-size: var(--main-font-size) * (3 * var(--gr));
+} */
+
+/* a:link {
+    text-decoration: none;
+    color:var(--main-link-color);
+}
+
+a:visited {
+    color:var(--main-link-color);
+} */
+
 
 .hero_page {
     background-color: #5fd400;
     padding: 1%;
 }
 
-.logo h1 {
+.top_heading {
+    padding: 3%;
+}
+
+.top_heading h1 {
     text-align: center;
-    font-size: 3em;
+    font-size: clamp(1.8rem, calc(7vw+1rem), 7rem); /*min, pref, max*/
     font-weight: bold;
 }
 
+.container {
+    padding: 1%;
+    /* padding-left: .5%;
+    padding-right: .5%; */
+}
+
+.blog_entry_container {
+    padding: 5%;
+}
 
 .image_container {
-    width: 48%;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    height: auto;
+    background-size: contain;
+    background-position: left;
     background-repeat: no-repeat;
     display: flex;
     position: relative;
+    justify-content: right;
+}
+
+
+.image_container > div {
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 40%;
+    margin: 10px;
+    padding: 30px;
+    /* opacity: 0.5; */
+    justify-content: flex-end;
+    /* flex-direction: row-reverse; */
 }

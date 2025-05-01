@@ -1,38 +1,87 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>The Bioinformatical Garden</title>
-    <link rel="stylesheet" href="website_style.css"> 
-</head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="website_style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js" defer></script>
+  </head>
 
-<body>
+  <body>
+    <!-- <nav class="top_menu"> -->
 
-    
-    <div class="top_menu">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="webpages/about_project.html">About - the garden</a></li>
-            <li><a href="webpages/about_me.html">About - the gardener</a></li>
-            <li><a href="webpages/blog.html">Blog</a></li>
-            <li><a href="webpages/news.html">News</a></li>
-        </ul>
-    </div>
-    
-    <div class="logo">
-       <h1>The Bioinformatical Garden</h1>
-    </div>
-    
-    <div class="hero_page">
+    <button
+      id="open-nav-button"
+      onclick="openNav()"
+      aria-label="open navbar"
+      aria-expanded="false"
+      aria-controls="navbar"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="32"
+        viewBox="0 -960 960 960"
+        width="32"
+      >
+        <path
+          d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
+        ></path>
+      </svg>
+    </button>
+
+    <nav id="navbar">
+      <ul>
+        <li>
+          <button
+            id="close-nav-button"
+            onclick="closeNav()"
+            aria-label="close navbar"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="32"
+              viewBox="0 -960 960 960"
+              width="32"
+              fill="#c9c9c9"
+            >
+              <path
+                d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+              ></path>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <a class="active-link" aria-current="page" href="index.html">Home</a>
+        </li>
+        <li><a href="webpages/about_project.html">About - the garden</a></li>
+        <li><a href="webpages/about_me.html">About - the gardener</a></li>
+        <li><a href="webpages/blog.html">Blog</a></li>
+        <li><a href="#webpages/news.html">News</a></li>
+      </ul>
+    </nav>
+
+    <div id="overlay" onclick="closeNav()" aria-hidden="true"></div>
+
+    <main>
+      <div class="top_heading">
+        <h1>The Bioinformatical Garden</h1>
+      </div>
+
+      <div class="hero_page">
         <p>
-            <b>Welcome to The Bioinformatical Garden!</b>
-            <br>
-            <br>
-            Have a look around to see if you can get some inspiration. 
-            The gardener is out and about in the garden but feel free to give him a notice at <a href="mailto:marius.klemetsen@outlook.com">marius.klemetsen@outlook.com</a>.
+          <b>Welcome to The Bioinformatical Garden!</b>
+          <br />
+          <br />
+          Have a look around to see if you can get some inspiration. The
+          gardener is out and about in the garden but feel free to give him a
+          notice at
+          <a href="mailto:marius.klemetsen@outlook.com"
+            >marius.klemetsen@outlook.com</a
+          >.
         </p>
-    </div>
-
-</body>
-
+      </div>
+    </main>
+  </body>
 </html>
