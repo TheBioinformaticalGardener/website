@@ -2,51 +2,105 @@
 <html>
   <head>
     <title>The Bioinformatical Garden - Blog</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" href="../website_style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../script.js" defer></script>
+    <link
+      rel="stylesheet-icons"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
   </head>
 
   <body>
     <!-- Navigation menu -->
-    <div class="top_menu">
+    <button
+      id="open-nav-button"
+      onclick="openNav()"
+      aria-label="open navbar"
+      aria-expanded="false"
+      aria-controls="navbar"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="32"
+        viewBox="0 -960 960 960"
+        width="32"
+      >
+        <path
+          d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
+        ></path>
+      </svg>
+    </button>
+
+    <nav id="navbar">
       <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../webpages/about_project.html">About - the garden</a></li>
-        <li><a href="../webpages/about_me.html">About - the gardener</a></li>
-        <li><a href="../webpages/blog.html">Blog</a></li>
+        <li>
+          <button
+            id="close-nav-button"
+            onclick="closeNav()"
+            aria-label="close navbar"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="32"
+              viewBox="0 -960 960 960"
+              width="32"
+              fill="#c9c9c9"
+            >
+              <path
+                d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+              ></path>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <a href="../index.html">Home</a>
+        </li>
+        <li><a href="./about_project.html">About - the garden</a></li>
+        <li><a href="./about_me.html">About - the gardener</a></li>
+        <li>
+          <a class="active-link" aria-current="page" href="./blog.html">Blog</a>
+        </li>
         <li><a href="#webpages/news.html">News</a></li>
       </ul>
-    </div>
+    </nav>
 
-    <!-- Top heading -->
-    <div class="logo">
-      <h1>Blog</h1>
-    </div>
+    <div id="overlay" onclick="closeNav()" aria-hidden="true"></div>
 
-    <!-- Entries section -->
-    <!-- NB! Following script from ChatGPT -->
-    <div id="blog_entry-container"></div>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-    fetch("blog_entries/entries.json")
-        .then((res) => res.json())
-        .then((entries) => {
-        const container = document.getElementById("blog_entry-container");
+    <main id="main-content">
+      <!-- Top heading -->
+      <div class="top_heading">
+        <h1>Blog</h1>
+      </div>
 
-        entries.forEach((entry) => {
-            fetch(entry.file)
-            .then((res) => res.text())
-            .then((md) => {
-                const article = document.createElement("article");
-                article.innerHTML = `
-                <h2>${entry.title}</h2>
-                <p><em>${entry.creation_date}</em></p>
-                ${marked.parse(md)}
-                `;
-                container.appendChild(article);
+      <!-- Entries section -->
+      <!-- NB! Following script from ChatGPT -->
+      <div id="blog_entry-container" , class="container"></div>
+      <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+      <script>
+        fetch("blog_entries/entries.json")
+          .then((res) => res.json())
+          .then((entries) => {
+            const container = document.getElementById("blog_entry-container");
+
+            entries.forEach((entry) => {
+              fetch(entry.file)
+                .then((res) => res.text())
+                .then((md) => {
+                  const article = document.createElement("article");
+                  article.innerHTML = `
+              <h2>${entry.title}</h2>
+              <p><em>${entry.creation_date}</em></p>
+              ${marked.parse(md)}
+              <br /><br />
+              `;
+                  container.appendChild(article);
+                });
             });
-        });
-        });
-    </script>
-
+          });
+      </script>
+    </main>
   </body>
 </html>
